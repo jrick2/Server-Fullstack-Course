@@ -36,12 +36,12 @@ userSchema.pre("save", async function (next) {
   const customer = await stripe.customers.create(
     { email },
     {
-      apiKey: config.get<string>("stripe_Secret_Key"),
+      apiKey: process.env.STRIPE_SECRET_KEY,
     }
   );
 
   user.stripeCustomerId = customer.id;
-  const salt = await bcrypt.genSalt(config.get<number>("saltWorkFactor"));
+  const salt = await bcrypt.genSalt(process.env.SALTFACTOR as any);
 
   const hash = await bcrypt.hashSync(user.password, salt);
 

@@ -1,10 +1,9 @@
 import { Request, Response } from "express";
-import config from "config";
 import { stripe } from "../utils/stripe";
 
 export async function stripeHandler(req: Request, res: Response) {
   const prices = await stripe.prices.list({
-    apiKey: config.get<string>("stripe_Secret_Key"),
+    apiKey: process.env.STRIPE_SECRET_KEY,
   });
 
   return res.json(prices);
@@ -12,7 +11,7 @@ export async function stripeHandler(req: Request, res: Response) {
 
 export async function stripeSession(req: Request, res: Response) {
   const user = res.locals.user;
-  const localHost = config.get<string>("origin");
+  const localHost = process.env.ORIGIN;
   const session = await stripe.checkout.sessions.create(
     {
       mode: "subscription",
@@ -22,7 +21,7 @@ export async function stripeSession(req: Request, res: Response) {
       cancel_url: `${localHost}/articlePlan`,
       customer: user.stripeCustomerId,
     },
-    { apiKey: config.get<string>("stripe_Secret_Key") }
+    { apiKey: process.env.STRIPE_SECRET_KEY }
   );
 
   return res.json(session);
