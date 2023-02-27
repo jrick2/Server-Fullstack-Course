@@ -1,7 +1,6 @@
 {
   "name": "rest-api",
   "version": "1.0.0",
-  "main": "src/app.ts",
   "author": "Code-Abe",
   "license": "MIT",
   "scripts": {
