@@ -49,10 +49,10 @@ export async function createUserHandler(
       secure: false,
     });
 
-    const sucess = "User created successfully";
+    const success = "User created successfully";
 
     return res.status(201).json({
-      sucess,
+      success,
       data: {
         _id: user._id,
         email: user.email,
