@@ -41,7 +41,7 @@ userSchema.pre("save", async function (next) {
   );
 
   user.stripeCustomerId = customer.id;
-  const salt = await bcrypt.genSalt(process.env.SALTFACTOR as any);
+  const salt = await bcrypt.genSalt(10);
 
   const hash = await bcrypt.hashSync(user.password, salt);
 
