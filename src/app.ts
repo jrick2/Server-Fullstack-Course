@@ -14,7 +14,7 @@ const app = express();
 
 app.use(
   cors({
-    origin: ["https://client-course.onrender.com/"],
+    origin: ["https://client-course.onrender.com/", "http://localhost:3000/"],
     credentials: true,
   })
 );
