@@ -12,7 +12,12 @@ const port = process.env.PORT;
 
 const app = express();
 
-app.use(cors());
+app.use(
+  cors({
+    origin: ["https://client-course.onrender.com"],
+    credentials: true,
+  })
+);
 
 app.use(cookieParser());
 
